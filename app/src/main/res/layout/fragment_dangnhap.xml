@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".views.fragments.dangnhapFragment"
+    android:id="@+id/dangnhapFragment"
+    android:background="@color/black"
+    >
+
+    <ImageButton
+        android:id="@+id/btn_quaylai"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/arrow"
+        android:contentDescription="Đăng nhập"
+        android:background="@null"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:src="@drawable/logo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="100dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đăng nhập vào Spotify"
+        android:textColor="@color/white"
+        android:textSize="26dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/logo"
+        android:layout_marginTop="170dp"
+        />
+    <EditText
+        android:id="@+id/txt_sdt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:textColor="@color/white"
+        android:background="@drawable/custom_txtdn"
+        android:hint="  Nhập số điện thoại"
+        android:textColorHint="#6D6A6A"
+        android:paddingStart="12dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/logo"
+        android:layout_marginTop="300dp"/>
+    <EditText
+        android:id="@+id/txt_passwork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:textColor="@color/white"
+        android:background="@drawable/custom_txtdn"
+        android:hint="  Nhập mật khẩu"
+        android:paddingStart="12dp"
+        android:textColorHint="#6D6A6A"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txt_sdt"
+        android:layout_marginTop="70dp"/>
+    <Button
+        android:id="@+id/btn_dn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đăng nhập"
+        android:textSize="22dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="@drawable/custom_btndk"
+        app:backgroundTint="@null"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txt_passwork"
+        android:layout_marginTop="80dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
