@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         boolean kt = spf.getBoolean("DangDN",false);
         if(kt)
         {
-            frsave = new HomeFragment();
+            frsave = new HomeFragment() ;
             replaceFragment(frsave,false,0);
         }
 

@@ -47,7 +47,6 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View v =inflater.inflate(R.layout.fragment_home, container, false);
         addView(v);
         FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
@@ -81,9 +80,14 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        imgbtnPre.setOnClickListener(v -> {
+            if(getActivity()instanceof  MainActivity){
+                ((MainActivity) getActivity()).openFragment(new PremiumFragment(),0);
+            }
+                });
         // Các nút khác sẽ hiển thị thông báo
         imgbtnLib.setOnClickListener(v -> Toast.makeText(getContext(), "Chức năng Thư viện đang phát triển", Toast.LENGTH_SHORT).show());
-        imgbtnPre.setOnClickListener(v -> Toast.makeText(getContext(), "Chức năng Premium đang phát triển", Toast.LENGTH_SHORT).show());
+
         imgbtnCrea.setOnClickListener(v -> Toast.makeText(getContext(), "Chức năng Tạo mới đang phát triển", Toast.LENGTH_SHORT).show());
     }
     private void addView(View v) {
