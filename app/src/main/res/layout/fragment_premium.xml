@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
-    tools:context=".YourActivityName">
+    tools:context=".views.fragments.PremiumFragment">
 
     <LinearLayout
         android:id="@+id/footer"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
         android:background="@drawable/custom_nav"
         android:orientation="horizontal"
         android:paddingTop="8dp"
-        android:paddingBottom="8dp">
+        android:paddingBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
             android:id="@+id/imgbtn_Home"
@@ -22,6 +25,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Trang chủ"
             android:src="@drawable/home" />
 
         <ImageButton
@@ -30,6 +34,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Tìm kiếm"
             android:src="@drawable/search" />
 
         <ImageButton
@@ -38,6 +43,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Thư viện"
             android:src="@drawable/library" />
 
         <ImageButton
@@ -46,6 +52,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Premium"
             android:src="@drawable/premium" />
 
         <ImageButton
@@ -54,20 +61,24 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Tạo playlist"
             android:src="@drawable/plus" />
 
     </LinearLayout>
 
-    <ScrollView
-        android:id="@+id/top_content_scrollview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/footer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -78,7 +89,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="170dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/imgbackpre" />
+                    android:src="@drawable/imgbackpre"
+                    tools:ignore="ContentDescription" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -86,7 +98,6 @@
                     android:gravity="center_vertical"
                     android:orientation="vertical"
                     android:padding="16dp">
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -96,16 +107,16 @@
                             android:id="@+id/imageView"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            android:src="@drawable/pre" />
+                            android:src="@drawable/pre"
+                            tools:ignore="ContentDescription" />
 
                         <TextView
                             android:id="@+id/textView"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:gravity="center_vertical"
                             android:layout_marginStart="8dp"
                             android:text="Premium"
-                            android:textAlignment="viewStart"
-                            android:textAllCaps="false"
                             android:textColor="@android:color/white"
                             android:textSize="24sp"
                             android:textStyle="bold|italic" />
@@ -119,7 +130,7 @@
                         android:paddingHorizontal="16dp"
                         android:text="Nghe nhạc không giới hạn. Dùng thử Premium Individual trong 3 tháng, chỉ 50.000 đồng với MelodyHub."
                         android:textColor="#FFFFFF"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -129,8 +140,8 @@
                     android:layout_height="24dp"
                     android:layout_gravity="bottom|start"
                     android:layout_marginBottom="6dp"
-                    android:src="@drawable/uudai" />
-
+                    android:src="@drawable/uudai"
+                    tools:ignore="ContentDescription" />
             </FrameLayout>
 
             <Button
@@ -154,29 +165,35 @@
                 android:textColor="#A0A0A0"
                 android:textSize="12sp" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lý do nên dùng gói Premium"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="24dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="8dp"/>
+
+            <LinearLayout
+                android:id="@+id/ll_Reasons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="16dp"
+                android:background="@drawable/custom_border_bgprereason"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvpre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:nestedScrollingEnabled="false" />
+
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/top_content_scrollview"
-        android:layout_above="@id/footer"
-        android:orientation="vertical"
-        android:paddingHorizontal="16dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcvprereason"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcvpre"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="6dp"/>
-
-    </LinearLayout>
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

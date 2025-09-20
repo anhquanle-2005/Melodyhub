@@ -73,10 +73,15 @@ public class SearchFragment extends Fragment {
       imgbtnSearch.setOnClickListener(v -> {
          Toast.makeText(getContext(), "Bạn đang ở màn hình Tìm kiếm", Toast.LENGTH_SHORT).show();
       });
+      imgbtnPre.setOnClickListener(v -> {
+         if (getActivity() instanceof MainActivity) {
+            ((MainActivity) getActivity()).openFragment(new PremiumFragment(), 0);
+         }
+      });
+
 
       // Các nút khác sẽ hiển thị thông báo
       imgbtnLib.setOnClickListener(v -> Toast.makeText(getContext(), "Chức năng Thư viện đang phát triển", Toast.LENGTH_SHORT).show());
-      imgbtnPre.setOnClickListener(v -> Toast.makeText(getContext(), "Chức năng Premium đang phát triển", Toast.LENGTH_SHORT).show());
       imgbtnCrea.setOnClickListener(v -> Toast.makeText(getContext(), "Chức năng Tạo mới đang phát triển", Toast.LENGTH_SHORT).show());
    }
    private void setupRecyclerView() {
