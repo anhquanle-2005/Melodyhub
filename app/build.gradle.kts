@@ -41,5 +41,7 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("com.squareup.picasso:picasso:2.8")
+    implementation("androidx.media3:media3-exoplayer:1.1.0")
+    implementation("androidx.media3:media3-ui:1.1.0")
 
 }

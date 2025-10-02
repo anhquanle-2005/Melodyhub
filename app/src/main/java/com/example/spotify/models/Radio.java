@@ -1,9 +1,9 @@
 package com.example.spotify.models;
 
-public class radio {
+public class Radio {
     private String txt_ngheSi, txt_name, url1,url2,url3;
 
-    public radio(String txt_ngheSi, String txt_name, String url1, String url2, String url3) {
+    public Radio(String txt_ngheSi, String txt_name, String url1, String url2, String url3) {
         this.txt_ngheSi = txt_ngheSi;
         this.txt_name = txt_name;
         this.url1 = url1;

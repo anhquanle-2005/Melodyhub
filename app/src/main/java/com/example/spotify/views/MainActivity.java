@@ -15,7 +15,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.spotify.R;
 import com.example.spotify.views.fragments.HomeFragment;
-import com.example.spotify.views.fragments.wellcomeFragment;
+import com.example.spotify.views.fragments.WellcomeFragment;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         else
         {
-            frsave = new wellcomeFragment();
+            frsave = new WellcomeFragment();
             replaceFragment(frsave,false ,0);
         }
 
@@ -73,10 +74,34 @@ public class MainActivity extends AppCompatActivity {
         }
         if(addToBackStack)
             transaction.addToBackStack(null);
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
     public void openFragment(Fragment fr, int kt){
         replaceFragment(fr,true, kt);
     }
 
+   public void showFragment(Fragment fragment, String tag) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        Fragment existing = fm.findFragmentByTag(tag);
+        if (existing == null) {
+            ft.add(R.id.container_body, fragment, tag);
+        } else {
+            ft.show(existing);
+        }
+        ft.addToBackStack(tag);
+        ft.commit();
+    }
+    public void addFragmentMusic(Fragment fragment, String tag) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        Fragment existing = fm.findFragmentByTag(tag);
+        if (existing == null) {
+            ft.add(R.id.view_music, fragment, tag);
+            ft.hide(fragment);
+        } else {
+            ft.hide(existing);
+        }
+        ft.commit();
+    }
 }

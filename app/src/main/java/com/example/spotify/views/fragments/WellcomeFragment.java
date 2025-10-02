@@ -12,7 +12,7 @@ import android.widget.Button;
 import com.example.spotify.views.MainActivity;
 import com.example.spotify.R;
 
-public class wellcomeFragment extends Fragment implements View.OnClickListener {
+public class WellcomeFragment extends Fragment implements View.OnClickListener {
     Button btn_dn, btn_dk;
 
     @Override
@@ -33,6 +33,6 @@ public class wellcomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.btn_dn)
-            ((MainActivity) requireActivity()).openFragment(new dangnhapFragment(),0);
+            ((MainActivity) requireActivity()).openFragment(new DangNhapFragment(),0);
     }
 }

@@ -4,21 +4,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spotify.R;
-import com.example.spotify.models.music;
+import com.example.spotify.models.Music;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class musicAdapter extends RecyclerView.Adapter<musicAdapter.musicViewHolder>{
-    private List<music> mmusicList;
-
-    public musicAdapter(List<music> mmusicList) {
+public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.musicViewHolder>{
+    private List<Music> mmusicList;
+    private OnItemClickListener listener;
+    public interface OnItemClickListener {
+        void onItemClick(Music ms);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+    public MusicAdapter(List<Music> mmusicList) {
         this.mmusicList = mmusicList;
     }
 
@@ -32,7 +39,7 @@ public class musicAdapter extends RecyclerView.Adapter<musicAdapter.musicViewHol
 
     @Override
     public void onBindViewHolder(@NonNull musicViewHolder holder, int position) {
-        music ms = mmusicList.get(position);
+        Music ms = mmusicList.get(position);
         if(ms==null)
         {
             return;
@@ -53,12 +60,26 @@ public class musicAdapter extends RecyclerView.Adapter<musicAdapter.musicViewHol
 
     class musicViewHolder extends RecyclerView.ViewHolder{
         private ImageView poster;
+        LinearLayout item_music;
         private TextView txt_tenBaiHat,txt_tacgia;
         public musicViewHolder(@NonNull View itemView) {
             super(itemView);
             poster = itemView.findViewById(R.id.poster);
+            item_music = itemView.findViewById(R.id.item_music);
             txt_tenBaiHat = itemView.findViewById(R.id.txt_tenBaiHat);
             txt_tacgia = itemView.findViewById(R.id.txt_tacgia);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null) {
+                        int position = getBindingAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(mmusicList.get(position));
+                        }
+                    }
+                }
+            });
         }
+
     }
 }

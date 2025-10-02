@@ -4,85 +4,47 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 
 import com.example.spotify.R;
 
-import com.example.spotify.adapter.musicAdapter;
-import com.example.spotify.adapter.playlistAdapter;
-import com.example.spotify.adapter.radioAdapter;
-import com.example.spotify.models.music;
-import com.example.spotify.models.playlist;
-import com.example.spotify.models.radio;
-import com.example.spotify.viewModels.musicViewModel;
-import com.example.spotify.viewModels.playlistViewModel;
-import com.example.spotify.viewModels.radioViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class HomeFragment extends Fragment {
-    private RecyclerView rcvmusic;
-    private List<music> mListmusic;
-    private musicAdapter msAdapter;
-    private RecyclerView rcvradio;
-    private List<radio> mListradio;
-    private radioAdapter radioAdapter;
-    private RecyclerView rcvplaylist;
-    private List<playlist> lplay;
-    private playlistAdapter playlistAdapter;
 
+    public int selectedId =-1;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v =inflater.inflate(R.layout.fragment_home, container, false);
-        addView(v);
-       FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
-       fr.add(R.id.container_body,new header_homeFragment());
-       fr.commit();
+        addfragnent(new HeaderHomeFragment(), new FooterFragment());
+        addBody(new HomeTatcaFragment());
+        selectedId = R.id.btn_tatca;
         return v;
     }
+    private void addfragnent (Fragment fr, Fragment fr2){
+        FragmentTransaction ftr = getChildFragmentManager().beginTransaction();
+        ftr.replace(R.id.contaier_header,fr);
+        ftr.replace(R.id.contaier_footer,fr2);
+        ftr.commit();
+    }
+    public void addBody(Fragment fr){
+        FragmentTransaction ftr = getChildFragmentManager().beginTransaction();
+        ftr.replace(R.id.contaier_body_home,fr);
+        ftr.commit();
 
-    private void addView(View v) {
+
+    }
 
 
 
 
-        rcvmusic=v.findViewById(R.id.rcvms);
-        mListmusic = new ArrayList<>();
-        musicViewModel mvd = new musicViewModel();
-        mListmusic = mvd.setView();
-         msAdapter = new musicAdapter(mListmusic);
-         LinearLayoutManager lm = new LinearLayoutManager(v.getContext());
-        rcvmusic.setLayoutManager(lm);
-        rcvmusic.setAdapter(msAdapter);
-        //view radio
-        rcvradio=v.findViewById(R.id.rcv_radio);
-        mListradio = new ArrayList<>();
-        radioViewModel rvd = new radioViewModel();
-        mListradio = rvd.setView();
-        radioAdapter = new radioAdapter(mListradio);
-        LinearLayoutManager lm1 = new LinearLayoutManager(v.getContext(),LinearLayoutManager.HORIZONTAL,false);
-        rcvradio.setLayoutManager(lm1);
-        rcvradio.setAdapter(radioAdapter);
-        // view playlist
-        rcvplaylist=v.findViewById(R.id.rcv_dexuat);
-        lplay= new ArrayList<>();
-        playlistViewModel plvd = new playlistViewModel();
-        lplay = plvd.setView();
-        playlistAdapter = new playlistAdapter(lplay);
-        LinearLayoutManager lm2 = new LinearLayoutManager(v.getContext(),LinearLayoutManager.HORIZONTAL,false);
-        rcvplaylist.setLayoutManager(lm2);
-        rcvplaylist.setAdapter(playlistAdapter);
+}
+
+
 //        layoutAdapter adapter = new layoutAdapter();
 //
 //        LinearLayoutManager lm = new LinearLayoutManager(v.getContext(),
@@ -94,8 +56,6 @@ public class HomeFragment extends Fragment {
 //        setView(0,v,rcvmusic);
 //        setView(1,v,rcvradio);
 //        setView(3,v,rcvplaylist);
-
-    }
 
 
 //    public void setView(int gtri, View v,RecyclerView rcv) {
@@ -132,4 +92,3 @@ public class HomeFragment extends Fragment {
 //        }
 //    }
 
-}

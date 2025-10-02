@@ -6,13 +6,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentContainer;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,7 +19,7 @@ import com.example.spotify.R;
 import com.example.spotify.views.MainActivity;
 import com.google.android.material.imageview.ShapeableImageView;
 
-public class menuFragment extends Fragment implements View.OnClickListener {
+public class MenuFragment extends Fragment implements View.OnClickListener {
     private ShapeableImageView img_profile;
     private ImageView img_close;
     private TextView txt_profile1, txt_profile2;
@@ -58,12 +56,24 @@ public class menuFragment extends Fragment implements View.OnClickListener {
         }
         if(v.getId()==R.id.dang_xuat)
         {
-            ((MainActivity)requireActivity()).frsave = new wellcomeFragment();
+            ((MainActivity)requireActivity()).frsave = new WellcomeFragment();
             ((MainActivity)requireActivity()).openFragment(((MainActivity)requireActivity()).frsave,0);
             SharedPreferences sp = requireContext().getSharedPreferences("DN",MODE_PRIVATE);
             SharedPreferences.Editor edt = sp.edit();
             edt.putBoolean("DangDN",false);
             edt.apply();
+            PlayMusicFragment playlist = (PlayMusicFragment) getParentFragmentManager().findFragmentByTag("PlayMusic");
+            ViewMusicFragment viewMuic = (ViewMusicFragment) getParentFragmentManager().findFragmentByTag("music");
+            if (playlist != null) {
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.remove(playlist);
+                fr.commit();
+            }
+            if (viewMuic != null) {
+                FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
+                fr.remove(viewMuic);
+                fr.commit();
+            }
         }
 
     }

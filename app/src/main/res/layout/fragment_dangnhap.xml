@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".views.fragments.dangnhapFragment"
+    tools:context=".views.fragments.DangNhapFragment"
     android:id="@+id/dangnhapFragment"
     android:background="@color/black"
     >
@@ -13,12 +13,12 @@
         android:id="@+id/btn_quaylai"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@drawable/arrow"
-        android:contentDescription="Đăng nhập"
         android:background="@null"
+        android:contentDescription="Đăng nhập"
+        android:src="@drawable/arrow"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/logo"
         android:layout_width="250dp"
@@ -64,6 +64,7 @@
         android:background="@drawable/custom_txtdn"
         android:hint="  Nhập mật khẩu"
         android:paddingStart="12dp"
+        android:inputType="textPassword"
         android:textColorHint="#6D6A6A"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".views.fragments.header_homeFragment">
+    tools:context=".views.fragments.HeaderHomeFragment">
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -23,8 +23,8 @@
             android:src="@drawable/user"
             android:background="@drawable/custom_avt"
             android:scaleType="centerCrop"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_gravity="center"
             android:clipToOutline="true"
             android:outlineProvider="background"
@@ -32,23 +32,23 @@
 
         <Button
             android:id="@+id/btn_tatca"
-            android:layout_width="82dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="40dp"
             android:text="Tất cả"
             android:textColor="@color/black"
             android:textSize="13dp"
             android:background="@drawable/custom_btndk"
             app:backgroundTint="@null"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
             android:layout_gravity="center"
             />
         <Button
             android:id="@+id/btn_nhac"
-            android:layout_width="80dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="40dp"
             android:text="Nhạc"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:textColor="@color/white"
             android:textSize="13dp"
             android:background="@drawable/custom_btn"
@@ -57,10 +57,12 @@
             />
         <Button
             android:id="@+id/btn_bodcast"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="40dp"
             android:text="Podcasts"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:textColor="@color/white"
             android:textSize="13dp"
             android:background="@drawable/custom_btn"
@@ -68,5 +70,6 @@
             android:layout_gravity="center"
             />
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

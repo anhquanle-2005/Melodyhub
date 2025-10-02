@@ -1,14 +1,31 @@
 package com.example.spotify.models;
 
 
+import java.util.List;
 
-public class playlist {
+public class Playlist {
    private String txt_bh, txt_nghesi,url;
+   private List<Music> playlist;
 
-    public playlist(String txt_bh, String txt_nghesi, String url) {
+    public Playlist(String txt_bh, String txt_nghesi, String url, List<Music> playlist) {
         this.txt_bh = txt_bh;
         this.txt_nghesi = txt_nghesi;
         this.url = url;
+        this.playlist = playlist;
+    }
+
+    public Playlist(String txt_bh, String txt_nghesi, String url) {
+        this.txt_bh = txt_bh;
+        this.txt_nghesi = txt_nghesi;
+        this.url = url;
+    }
+
+    public List<Music> getPlaylist() {
+        return playlist;
+    }
+
+    public void setPlaylist(List<Music> playlist) {
+        this.playlist = playlist;
     }
 
     public String getTxt_bh() {

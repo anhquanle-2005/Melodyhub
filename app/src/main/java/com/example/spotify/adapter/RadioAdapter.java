@@ -1,25 +1,27 @@
 package com.example.spotify.adapter;
 
 
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.spotify.R;
-import com.example.spotify.models.radio;
+import com.example.spotify.models.Radio;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class radioAdapter extends RecyclerView.Adapter<radioAdapter.radioViewHolder> {
-    private List<radio> Lrdo;
+public class RadioAdapter extends RecyclerView.Adapter<RadioAdapter.radioViewHolder> {
+    private List<Radio> Lrdo;
 
-    public radioAdapter(List<radio> lrdo) {
+    public RadioAdapter(List<Radio> lrdo) {
         Lrdo = lrdo;
     }
 
@@ -32,7 +34,25 @@ public class radioAdapter extends RecyclerView.Adapter<radioAdapter.radioViewHol
 
     @Override
     public void onBindViewHolder(@NonNull radioViewHolder holder, int position) {
-        radio rd = Lrdo.get(position);
+        Radio rd = Lrdo.get(position);
+        int marginInDp = 10;
+        int marginInPx = (int) TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                marginInDp,
+                holder.item_radio.getContext().getResources().getDisplayMetrics()
+        );
+        if(position==0)
+        {
+            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) holder.item_radio.getLayoutParams();
+            params.leftMargin = marginInPx;
+            holder.item_radio.setLayoutParams(params);
+        }
+        if(position==Lrdo.size()-1)
+        {
+            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) holder.item_radio.getLayoutParams();
+            params.rightMargin = marginInPx;
+            holder.item_radio.setLayoutParams(params);
+        }
         if (rd == null)
             return;
         holder.txt_name.setText(rd.getTxt_name());
@@ -53,12 +73,13 @@ public class radioAdapter extends RecyclerView.Adapter<radioAdapter.radioViewHol
 
         ShapeableImageView img1, img2, img3;
         TextView txt_name, txt_nghesi;
-
+        LinearLayout item_radio;
         public radioViewHolder(@NonNull View itemView) {
             super(itemView);
             img1 = itemView.findViewById(R.id.CD1);
             img2 = itemView.findViewById(R.id.CD2);
             img3 = itemView.findViewById(R.id.CD3);
+            item_radio = itemView.findViewById(R.id.item_radio);
             txt_name = itemView.findViewById(R.id.txt_name);
             txt_nghesi = itemView.findViewById(R.id.txt_ngheSi);
         }

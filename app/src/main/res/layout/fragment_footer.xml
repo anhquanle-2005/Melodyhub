@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/footer"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/custom_nav"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageButton
+            android:id="@+id/imgbtn_Home"
+            android:src="@drawable/home"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:background="@android:color/transparent"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            />
+        <ImageButton
+            android:id="@+id/imgbtn_Search"
+            android:src="@drawable/search"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            />
+        <ImageButton
+            android:id="@+id/imgbtn_Lib"
+            android:src="@drawable/library"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            />
+        <ImageButton
+            android:id="@+id/imgbtn_Pre"
+            android:src="@drawable/premium"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            />
+        <ImageButton
+            android:id="@+id/imgbtn_Crea"
+            android:src="@drawable/plus1"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

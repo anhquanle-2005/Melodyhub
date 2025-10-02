@@ -17,7 +17,7 @@ import com.example.spotify.views.MainActivity;
 import com.example.spotify.R;
 
 
-public class dangnhapFragment extends Fragment implements View.OnClickListener{
+public class DangNhapFragment extends Fragment implements View.OnClickListener{
     Button btn_dn1;
     ImageButton btn_quaylai;
     EditText txt_sdt, txt_passwork;
@@ -44,11 +44,12 @@ public class dangnhapFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.btn_quaylai)
-            ((MainActivity) requireActivity()).openFragment(new wellcomeFragment(),1);
+            ((MainActivity) requireActivity()).openFragment(new WellcomeFragment(),1);
         if(v.getId()==R.id.btn_dn1 && txt_sdt.getText().toString().equals("0123456789") && txt_passwork.getText().toString().equals("123456"))
         {
             ((MainActivity)requireActivity()).frsave= new HomeFragment();
             ((MainActivity)requireActivity()).openFragment( ((MainActivity)requireActivity()).frsave,0);
+
             SharedPreferences spf = requireContext().getSharedPreferences("DN", Context.MODE_PRIVATE);
             SharedPreferences.Editor edt = spf.edit();
             edt.putBoolean("DangDN",true);

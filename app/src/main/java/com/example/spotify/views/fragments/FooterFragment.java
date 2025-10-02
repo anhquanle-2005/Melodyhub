@@ -12,10 +12,10 @@ import com.example.spotify.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link home_nhacFragment#newInstance} factory method to
+ * Use the {@link FooterFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class home_nhacFragment extends Fragment {
+public class FooterFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class home_nhacFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public home_nhacFragment() {
+    public FooterFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class home_nhacFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment home_nhacFragment.
+     * @return A new instance of fragment footerFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static home_nhacFragment newInstance(String param1, String param2) {
-        home_nhacFragment fragment = new home_nhacFragment();
+    public static FooterFragment newInstance(String param1, String param2) {
+        FooterFragment fragment = new FooterFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class home_nhacFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_nhac, container, false);
+        return inflater.inflate(R.layout.fragment_footer, container, false);
     }
 }

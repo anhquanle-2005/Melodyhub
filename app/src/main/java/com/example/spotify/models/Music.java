@@ -1,10 +1,10 @@
 package com.example.spotify.models;
 
-public class music {
+public class Music {
 
     private String tenbaiHat, tacGia, url;
 
-    public music(String tenbaiHat, String tacGia, String url) {
+    public Music(String tenbaiHat, String tacGia, String url) {
         this.tenbaiHat = tenbaiHat;
         this.tacGia = tacGia;
         this.url = url;
