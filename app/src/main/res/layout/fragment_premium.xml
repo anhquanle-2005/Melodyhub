@@ -150,6 +150,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="12dp"
+                app:backgroundTint="@null"
                 android:background="@drawable/custom_btn_pre"
                 android:text="Dùng thử 3 tháng với giá 50.000 đồng"
                 android:textColor="@android:color/black"
