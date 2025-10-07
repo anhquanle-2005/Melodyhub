@@ -1,36 +1,47 @@
 package com.example.spotify.models;
 
-public class Music {
+import java.io.Serializable;
 
-    private String tenbaiHat, tacGia, url;
+public class Music implements Serializable {
 
-    public Music(String tenbaiHat, String tacGia, String url) {
-        this.tenbaiHat = tenbaiHat;
-        this.tacGia = tacGia;
-        this.url = url;
+    private String TenBaiHat, Anh, DuongDan,TenNgheSi;
+
+    public Music(String tenBaiHat, String anh, String duongDan, String tenNgheSi) {
+        TenBaiHat = tenBaiHat;
+        Anh = anh;
+        DuongDan = duongDan;
+        TenNgheSi = tenNgheSi;
     }
 
-    public String getTenbaiHat() {
-        return tenbaiHat;
+    public String getDuongDan() {
+        return DuongDan;
     }
 
-    public void setTenbaiHat(String tenbaiHat) {
-        this.tenbaiHat = tenbaiHat;
+    public void setDuongDan(String duongDan) {
+        DuongDan = duongDan;
     }
 
-    public String getTacGia() {
-        return tacGia;
+    public String getTenBaiHat() {
+        return TenBaiHat;
     }
 
-    public void setTacGia(String tacGia) {
-        this.tacGia = tacGia;
+    public void setTenBaiHat(String tenBaiHat) {
+        TenBaiHat = tenBaiHat;
     }
 
-    public String getUrl() {
-        return url;
+    public String getTenNgheSi() {
+        return TenNgheSi;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setTenNgheSi(String tenNgheSi) {
+        TenNgheSi = tenNgheSi;
+    }
+
+    public String getAnh() {
+        return Anh;
+    }
+
+    public void setAnh(String anh) {
+        Anh = anh;
     }
 }

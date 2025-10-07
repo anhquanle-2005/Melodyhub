@@ -44,9 +44,9 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.musicViewHol
         {
             return;
         }
-        holder.txt_tenBaiHat.setText(ms.getTenbaiHat());
-        holder.txt_tacgia.setText(ms.getTacGia());
-        Picasso.get().load(ms.getUrl()).placeholder(R.drawable.loading).error(R.drawable.warning).into(holder.poster);
+        holder.txt_tenBaiHat.setText(ms.getTenBaiHat());
+        holder.txt_tacgia.setText(ms.getTenNgheSi());
+        Picasso.get().load(ms.getAnh()).placeholder(R.drawable.loading).error(R.drawable.warning).into(holder.poster);
     }
 
     @Override

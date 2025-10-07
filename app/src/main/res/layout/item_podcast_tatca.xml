@@ -1,8 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:baselineAligned="false"
+    android:background="@color/black"
     android:orientation="vertical">
+    <LinearLayout
+        android:layout_margin="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        >
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="50dp"
+            android:id="@+id/img_podcast_tatca_anh"
+            android:layout_height="50dp"
+            android:src="@drawable/bigteam"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/RadioImageView"
+            />
+            <TextView
+                android:id="@+id/txt_podcast_tatca_tacgia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="BigTeam"
+                android:layout_marginLeft="10sp"
+                android:textColor="#DCDBDB"
+                android:textSize="14sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/lnl_podcast"
+        android:layout_margin="10sp"
+        android:layout_width="match_parent"
+        android:background="#AB1E1E"
+        android:orientation="vertical"
+        android:layout_height="160dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="100sp"
+                android:id="@+id/img_podcast_tatca_anh2"
+                android:layout_height="100sp"
+                android:layout_margin="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bigteam"
+                app:shapeAppearanceOverlay="@style/RadioImageView"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/txt_podcast_tatca_noidung"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nội dung"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"/>
+                <TextView
+                    android:id="@+id/txt_podcast_tatca_tacgia2"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tác giả"
+                    android:textSize="18sp"
+                    android:textColor="#DCDCDC"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/img_podcast_tatca_play"
+            android:layout_width="40sp"
+            android:layout_height="30sp"
+            android:src="@drawable/play_buttton1"
+            android:layout_gravity="end"
+            android:layout_marginRight="40sp"/>
+    </LinearLayout>
 
 </LinearLayout>

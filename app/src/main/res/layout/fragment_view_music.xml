@@ -9,11 +9,12 @@
     android:layout_height="60dp"
     >
     <ImageView
+        android:id="@+id/img_view_music_anh"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
-        android:src="@drawable/bigteam"/>
+        />
     <LinearLayout
         android:layout_width="0dp"
         android:layout_weight="7"

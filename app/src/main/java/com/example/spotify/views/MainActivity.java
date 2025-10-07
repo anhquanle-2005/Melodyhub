@@ -2,11 +2,15 @@ package com.example.spotify.views;
 
 import android.annotation.SuppressLint;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.content.ComponentName;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,12 +18,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.spotify.R;
+import com.example.spotify.Service.MusicService;
 import com.example.spotify.views.fragments.HomeFragment;
+import com.example.spotify.views.fragments.PlayMusicFragment;
 import com.example.spotify.views.fragments.WellcomeFragment;
 
 
 
 public class MainActivity extends AppCompatActivity {
+
 
     public Fragment frsave;
     @SuppressLint("MissingInflatedId")
@@ -80,28 +87,41 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(fr,true, kt);
     }
 
-   public void showFragment(Fragment fragment, String tag) {
+   public void showFragment(Fragment fragment, String tag,boolean kt ) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         Fragment existing = fm.findFragmentByTag(tag);
         if (existing == null) {
             ft.add(R.id.container_body, fragment, tag);
-        } else {
+        } else if(kt == false)
+        {
+            ft.remove(existing);
+            ft.add(R.id.container_body, fragment, tag);
+        }
+        else
+        {
             ft.show(existing);
         }
-        ft.addToBackStack(tag);
+
         ft.commit();
     }
-    public void addFragmentMusic(Fragment fragment, String tag) {
+    public void addFragmentMusic(Fragment fragment, String tag, boolean kt) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         Fragment existing = fm.findFragmentByTag(tag);
-        if (existing == null) {
+        if (existing != null && !kt) {
+            ft.remove(existing);
+        }
+        if(existing == null || !kt)
+        {
             ft.add(R.id.view_music, fragment, tag);
             ft.hide(fragment);
-        } else {
+
+        }else
+        {
             ft.hide(existing);
         }
         ft.commit();
     }
+
 }

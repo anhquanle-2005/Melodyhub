@@ -1,16 +1,19 @@
 package com.example.spotify.views.fragments;
+import static com.example.spotify.Service.MusicServiceHelper.isPlaying;
 import static com.google.common.reflect.Reflection.getPackageName;
 
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.media3.common.MediaItem;
-import androidx.media3.common.Player;
-import androidx.media3.exoplayer.ExoPlayer;
+import androidx.lifecycle.ViewModelProvider;
+
 
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -22,6 +25,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.spotify.R;
+import com.example.spotify.Service.MusicService;
+import com.example.spotify.Service.MusicServiceHelper;
+import com.example.spotify.viewModels.MusicViewModel;
+import com.squareup.picasso.Picasso;
 
 
 public class PlayMusicFragment extends Fragment implements View.OnClickListener{
@@ -29,7 +36,9 @@ public class PlayMusicFragment extends Fragment implements View.OnClickListener{
     private SeekBar sb;
     private Handler handler = new Handler();
     private TextView txt_baihat, txt_tacgia;
-    public ExoPlayer player;
+
+    private ImageView img_anh;
+    private OnBackPressedCallback backCallback;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,8 +47,10 @@ public class PlayMusicFragment extends Fragment implements View.OnClickListener{
         addView(v);
         btn_pause.setOnClickListener(this);
         btn_back.setOnClickListener(this);
+
         return v;
     }
+
 
     private void addView(View v) {
         btn_previous = v.findViewById(R.id.btn_previous);
@@ -49,6 +60,7 @@ public class PlayMusicFragment extends Fragment implements View.OnClickListener{
         txt_baihat = v.findViewById(R.id.txt_baihat);
         txt_tacgia = v.findViewById(R.id.txt_tentacgia);
         btn_back = v.findViewById(R.id.btn_back);
+        img_anh = v.findViewById(R.id.img_play_music_anh);
         txt_baihat.setSelected(true);
         txt_tacgia.setSelected(true);
     }
@@ -56,82 +68,122 @@ public class PlayMusicFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Playmusic();
-        player.addListener(new Player.Listener() {
-            @Override
-            public void onPlaybackStateChanged(int state) {
-                if (state == Player.STATE_READY) {
-                    long duration = player.getDuration();
-                    if (duration > 0) {
-                        sb.setMax((int) duration);
-                    }
-                }
+//        backCallback = new OnBackPressedCallback(true) {
+//            @Override
+//            public void handleOnBackPressed() {
+//                if (isVisible()) {
+//                    Fragment music = getParentFragmentManager().findFragmentByTag("music");
+//                    if (music != null) {
+//                        getParentFragmentManager().beginTransaction()
+//                                .hide(PlayMusicFragment.this)
+//                                .show(music)
+//                                .commit();
+//                    }
+//                } else {
+//                    // Nếu fragment không visible → cho back mặc định hoạt động
+//                    setEnabled(false);
+//                }
+//            }
+//
+//        };
+//        // Bind với lifecycle fragment
+//        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), backCallback);
+
+        Bundle bl = getArguments();
+
+        if (bl!=null)
+        {
+            String ten = bl.getString("TenBaiHat");
+            String anh = bl.getString("Anh");
+            String tacgia = bl.getString("TacGia");
+            String url = bl.getString("url");
+            txt_baihat.setText(ten);
+            txt_tacgia.setText(tacgia);
+            Picasso.get().load(anh).placeholder(R.drawable.loading).error(R.drawable.warning).into(img_anh);
+            phatnhac(url);
+        }
+
+        handler.postDelayed(updateSeekBar, 1000);
+        MusicServiceHelper.getCurrentSong().observe(getViewLifecycleOwner(), music -> {
+            if (music != null) {
+                txt_baihat.setText(music.getTenBaiHat());
+                txt_tacgia.setText(music.getTenNgheSi());
+                Picasso.get().load(music.getAnh()).into(img_anh);
             }
         });
-        handler.postDelayed(updateSeekBar, 1000);
-    }
-    private void Playmusic() {
-      Uri uri = Uri.parse("android.resource://" + requireContext().getPackageName() + "/"+R.raw.bigteam);
-        phatnhac(uri);
+
+
+
     }
 
     @Override
     public void onClick(View v) {
+        MediaPlayer player = MusicServiceHelper.getPlayer();
+        if (player == null) return;
         ViewMusicFragment music = (ViewMusicFragment) getParentFragmentManager().findFragmentByTag("music");
         if (music != null) {
             ImageView img = music.img_stop;
-            if(v.getId()==R.id.btn_pause)
-            {
-                if(player.isPlaying())
-                {
-                    player.pause();
+
+            if (v.getId() == R.id.btn_pause) {
+                if (isPlaying()) {
+                    Intent intent = new Intent(requireContext(), MusicService.class);
+                    intent.setAction("PAUSE");
+                    requireContext().startService(intent);
                     btn_pause.setImageResource(R.drawable.play_button);
                     img.setImageResource(R.drawable.play_buttton1);
-                }
-                else {
-                    player.play();
+                } else {
+                    // Gửi lệnh resume
+                    Intent intent = new Intent(requireContext(), MusicService.class);
+                    intent.setAction("RESUME");
+                    requireContext().startService(intent);
+
                     btn_pause.setImageResource(R.drawable.pause);
                     img.setImageResource(R.drawable.stop);
                 }
             }
-            if(v.getId()==R.id.btn_back)
-            {
 
+            if (v.getId() == R.id.btn_back) {
                 FragmentTransaction fr = requireActivity().getSupportFragmentManager().beginTransaction();
                 fr.hide(this);
                 fr.show(music);
                 fr.commit();
-
             }
-
         }
-
     }
+
 
     private Runnable updateSeekBar = new Runnable() {
         @Override
         public void run() {
-            if (isAdded()) {
+            if (!isAdded()) return;
 
-                if (player != null && player.isPlaying()) {
-                    sb.setProgress((int) player.getCurrentPosition());
-                }
-                handler.postDelayed(this, 1000);
+            MediaPlayer player = MusicServiceHelper.getPlayer(); // <-- Lấy player đang dùng từ Helper
+            if (player != null && player.isPlaying()) {
+                sb.setMax(player.getDuration());
+                sb.setProgress(player.getCurrentPosition());
             }
+
+            handler.postDelayed(this, 1000);
         }
     };
+
+
+
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         handler.removeCallbacks(updateSeekBar); // hủy runnable khi fragment bị đóng
     }
-    public void phatnhac(Uri url){
-        player = new ExoPlayer.Builder(requireContext()).build();
-        MediaItem meit = MediaItem.fromUri(url);
-        player.setMediaItem(meit);
-        player.prepare();
-        player.play();
+    private boolean isPlaying() {
+        return MusicServiceHelper.isPlaying(); // hàm static hỗ trợ kiểm tra từ service
+    }
+
+    public void phatnhac(String url){
+        Intent serviceIntent = new Intent(requireContext(), MusicService.class);
+        serviceIntent.setAction("PLAY");
+        serviceIntent.putExtra("url", url); // link lấy từ API
+        requireContext().startService(serviceIntent);
     }
 //    @Override
 //    public void onStop(){

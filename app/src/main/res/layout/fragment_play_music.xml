@@ -33,11 +33,12 @@
             android:src="@drawable/more"/>
     </LinearLayout>
     <ImageView
+        android:id="@+id/img_play_music_anh"
         android:layout_width="300dp"
         android:layout_height="400dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:src="@drawable/bigteam"/>
+       />
     <TextView
         android:id="@+id/txt_baihat"
         android:layout_width="match_parent"

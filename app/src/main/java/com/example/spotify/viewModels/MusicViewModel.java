@@ -1,28 +1,31 @@
 package com.example.spotify.viewModels;
 
-import com.example.spotify.models.Music;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
-import java.util.ArrayList;
+import com.example.spotify.models.Music;
+import com.example.spotify.Repository.MusicRepository;
+
 import java.util.List;
 
-public class MusicViewModel {
-  private List<Music> msl = new ArrayList<>();
+public class MusicViewModel extends ViewModel {
+    private final MusicRepository repository = new MusicRepository();
 
-    public MusicViewModel() {
+    private final MutableLiveData<List<Music>> musicList = new MutableLiveData<>();
+    private final MutableLiveData<String> errorMessage = new MutableLiveData<>();
+
+    public LiveData<List<Music>> getMusicList() {
+        return musicList;
     }
 
-    public List<Music> getMsl() {
-        return msl;
+
+
+    public LiveData<String> getErrorMessage() {
+        return errorMessage;
     }
 
-    public List setView(){
-        Music ms1 = new Music("Vết thương", "Fishy","https://i.scdn.co/image/ab67616d00001e02cb2a3066584a339e09508520");
-        Music ms3 = new Music("BigTeam all stars", "BigDaddy, 7Dnight, DANGRANGTO, HURRYKNG, Pháp Kiều, $A Livan","https://i1.sndcdn.com/artworks-fqL73ggcxCeQtgsf-wQqmRQ-t1080x1080.jpg");
-        Music ms2 = new Music("EZ","Sabbirose, 7Dnight, VCC Left Hand" ,"https://i.scdn.co/image/ab67616d00001e0203aeb634b34fed42641718a2");
-        msl.add(ms1);
-        msl.add(ms3);
-        msl.add(ms2);
-        return msl;
-
+    public void loadMusic() {
+        repository.fetchMusic(musicList, errorMessage);
     }
 }
