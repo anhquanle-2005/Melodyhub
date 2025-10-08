@@ -16,13 +16,13 @@ import android.widget.Toast;
 
 import com.example.spotify.R;
 
-import com.example.spotify.adapter.musicAdapter;
+import com.example.spotify.adapter.MusicAdapter;
 import com.example.spotify.adapter.playlistAdapter;
 import com.example.spotify.adapter.radioAdapter;
-import com.example.spotify.models.music;
+import com.example.spotify.models.Music;
 import com.example.spotify.models.playlist;
 import com.example.spotify.models.radio;
-import com.example.spotify.viewModels.musicViewModel;
+import com.example.spotify.viewModels.MusicViewModel;
 import com.example.spotify.viewModels.playlistViewModel;
 import com.example.spotify.viewModels.radioViewModel;
 import com.example.spotify.views.activity.MainActivity;
@@ -33,8 +33,8 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     private RecyclerView rcvmusic;
-    private List<music> mListmusic;
-    private musicAdapter msAdapter;
+    private List<Music> mListmusic;
+    private MusicAdapter msAdapter;
     private RecyclerView rcvradio;
     private List<radio> mListradio;
     private radioAdapter radioAdapter;
@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment {
             if(getActivity()instanceof  MainActivity){
                 ((MainActivity) getActivity()).openFragment(new PremiumFragment(),0);
             }
-                });
+        });
         // Các nút khác sẽ hiển thị thông báo
         imgbtnLib.setOnClickListener(v -> Toast.makeText(getContext(), "Chức năng Thư viện đang phát triển", Toast.LENGTH_SHORT).show());
 
@@ -94,9 +94,9 @@ public class HomeFragment extends Fragment {
 
         rcvmusic=v.findViewById(R.id.rcvms);
         mListmusic = new ArrayList<>();
-        musicViewModel mvd = new musicViewModel();
+        MusicViewModel mvd = new MusicViewModel();
         mListmusic = mvd.setView();
-        msAdapter = new musicAdapter(mListmusic);
+        msAdapter = new MusicAdapter(mListmusic);
         LinearLayoutManager lm = new LinearLayoutManager(v.getContext());
         rcvmusic.setLayoutManager(lm);
         rcvmusic.setAdapter(msAdapter);

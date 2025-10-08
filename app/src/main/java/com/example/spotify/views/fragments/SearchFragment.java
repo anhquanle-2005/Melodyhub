@@ -1,5 +1,7 @@
 package com.example.spotify.views.fragments;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,11 @@ import androidx.media3.exoplayer.ExoPlayer;
 import androidx.media3.ui.PlayerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.spotify.API.ApiClient;
+import com.example.spotify.API.ApiService;
+import com.example.spotify.adapter.MusicAdapter;
+import com.example.spotify.models.Music;
 import com.example.spotify.models.Song;
 import com.example.spotify.adapter.SongAdapter;
 import com.example.spotify.R;
@@ -24,44 +31,49 @@ import com.example.spotify.views.activity.MainActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class SearchFragment extends Fragment {
 
    private SearchView searchView;
-   private RecyclerView rcvms;
-   private SongAdapter songAdapter;
+   private RecyclerView rcvmsr;
+   private MusicAdapter musicAdapter;
+   private ApiService apiService;
+   private Handler handler= new Handler(Looper.getMainLooper());
+   private Runnable searchRunnable;
    private ImageButton imgbtnHome,imgbtnSearch,imgbtnLib,imgbtnPre,imgbtnCrea;
 
-   private List<Song> allSongs; // Danh sách chứa tất cả bài hát
-   private LayoutInflater inflater;
+//   private List<Song> allSongs;
 
    private ExoPlayer player1, player2, player3;
    private PlayerView playerView1, playerView2, playerView3;
    @Nullable
    @Override
    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-      // Gắn layout XML vào Fragmenth
       return inflater.inflate(R.layout.fragment_search, container, false);
    }
 
    @Override
    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
       super.onViewCreated(view, savedInstanceState);
-
-      // Ánh xạ các view từ layout XML bằng ID
+      apiService = ApiClient.getClient().create(ApiService.class);
       searchView = view.findViewById(R.id.search_view);
-      rcvms = view.findViewById(R.id.rcvmsr);
+      rcvmsr = view.findViewById(R.id.rcvmsr);
       playerView1 = view.findViewById(R.id.player_view_1);
       playerView2 = view.findViewById(R.id.player_view_2);
       playerView3 = view.findViewById(R.id.player_view_3);
-
-      // Chuẩn bị dữ liệu và RecyclerView
-      loadDummySongs();
       setupRecyclerView();
       setupSearchView();
       initViews(view);
       setupClickListeners();
       initializePlayer();
+      performSearch("");
    }
+
+
+
    private void initViews(View v) {
       imgbtnHome=v.findViewById(R.id.imgbtn_Home);
       imgbtnSearch=v.findViewById(R.id.imgbtn_Search);
@@ -70,7 +82,6 @@ public class SearchFragment extends Fragment {
       imgbtnCrea=v.findViewById(R.id.imgbtn_Crea);
    }
 
-   // Hàm thiết lập các sự kiện click
    private void setupClickListeners() {
       // Nút Home sẽ quay về HomeFragment
       imgbtnHome.setOnClickListener(v -> {
@@ -120,68 +131,52 @@ public class SearchFragment extends Fragment {
       });
    }
    private void setupRecyclerView() {
-      // Thiết lập RecyclerView để hiển thị danh sách theo chiều dọc
-      rcvms.setLayoutManager(new LinearLayoutManager(getContext()));
-      // Khởi tạo Adapter với danh sách bài hát ban đầu
-      songAdapter = new SongAdapter(allSongs);
-      rcvms.setAdapter(songAdapter);
+      rcvmsr.setLayoutManager(new LinearLayoutManager(getContext()));
+      musicAdapter = new MusicAdapter(new ArrayList<>());
+      rcvmsr.setAdapter(musicAdapter);
    }
-
    private void setupSearchView() {
       searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-         // Phương thức này được gọi khi người dùng nhấn nút tìm kiếm
          @Override
          public boolean onQueryTextSubmit(String query) {
-            filter(query);
-            return false;
+//            filter(query);
+            handler.removeCallbacks(searchRunnable);
+            return true;
          }
-
-         // Phương thức này được gọi mỗi khi văn bản trong ô tìm kiếm thay đổi
          @Override
          public boolean onQueryTextChange(String newText) {
-            filter(newText);
+//            filter(newText);
+            handler.removeCallbacks(searchRunnable);
+            searchRunnable =() -> performSearch(newText);
+            handler.postDelayed(searchRunnable, 500);
             return true;
          }
       });
    }
 
-   // Hàm lọc danh sách bài hát
-   private void filter(String text) {
-      ArrayList<Song> filteredList = new ArrayList<>();
-      // Lặp qua tất cả bài hát
-      for (Song item : allSongs) {
-         // Nếu tên bài hát hoặc tên nghệ sĩ chứa từ khóa tìm kiếm (không phân biệt hoa thường)
-         if (item.getTitle().toLowerCase().contains(text.toLowerCase()) ||
-                 item.getArtist().toLowerCase().contains(text.toLowerCase())) {
-            filteredList.add(item); // Thêm vào danh sách kết quả
+   private void performSearch(String query) {
+      apiService.searchMusic(query).enqueue(new Callback<List<Music>>(){
+         @Override
+         public void onResponse(Call<List<Music>> call, Response<List<Music>> response) {
+            if(response.isSuccessful()&&response.body()!=null){
+               musicAdapter.setData(response.body());
+            }
+            else{
+               musicAdapter.setData(new ArrayList<>());
+               Toast.makeText(getContext(), "Không tìm thấy kết quả", Toast.LENGTH_SHORT).show();
+            }
+
          }
-      }
-      // Cập nhật danh sách hiển thị trên Adapter
-      songAdapter.filterList(filteredList);
+
+         @Override
+         public void onFailure(Call<List<Music>> call, Throwable t) {
+         Toast.makeText(getContext(), "Lỗi kết nối", Toast.LENGTH_SHORT).show();
+
+         }
+      });
+
    }
 
-   // Hàm tạo dữ liệu giả lập
-   private void loadDummySongs() {
-      allSongs = new ArrayList<>();
-      // Lấy tên package của ứng dụng để tạo URI cho drawable
-      String packageName = getContext().getPackageName();
-
-      // Tạo URI dưới dạng String cho từng ảnh trong thư mục drawable
-      // Định dạng: "android.resource://[package_name]/[resource_id]"
-      String nangAmUri = "android.resource://" + packageName + "/" + R.drawable.nangam;
-      String emUri = "android.resource://" + packageName + "/" + R.drawable.em;
-
-      // Giờ đây, chúng ta truyền một String hợp lệ vào constructor của Song
-      allSongs.add(new Song("1", "Nắng Ấm Xa Dần", "Sơn Tùng M-TP", nangAmUri));
-      allSongs.add(new Song("2", "Em Của Ngày Hôm Qua", "Sơn Tùng M-TP", emUri));
-      allSongs.add(new Song("3", "Chúng Ta Của Hiện Tại", "Sơn Tùng M-TP", nangAmUri)); // Dùng lại ảnh để làm ví dụ
-      allSongs.add(new Song("4", "See You Again", "Wiz Khalifa", nangAmUri));
-      allSongs.add(new Song("5", "Shape of You", "Ed Sheeran", nangAmUri));
-      allSongs.add(new Song("6", "Blinding Lights", "The Weeknd", nangAmUri));
-      allSongs.add(new Song("7", "Đi Về Nhà", "Đen Vâu ft. JustaTee", nangAmUri));
-      allSongs.add(new Song("8", "Mang Tiền Về Cho Mẹ", "Đen Vâu ft. Nguyên Thảo", nangAmUri));
-      allSongs.add(new Song("9", "Waiting For You", "MONO", nangAmUri));
-   }
    private void initializePlayer(){
 //      player1 = new ExoPlayer.Builder(requireContext()).build();
 //      playerView1.setPlayer(player1);
