@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/filter"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_sheet_background"
+    android:paddingStart="24dp"
+    android:paddingEnd="0dp"
+    android:paddingTop="24dp"
+    android:paddingBottom="24dp">
+
+    <TextView
+        android:id="@+id/tv_filter_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bộ lọc"
+
+
+        android:textColor="@android:color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+<!--    <ToggleButton-->
+<!--        android:id="@+id/sport"-->
+<!--        android:layout_width="65dp"-->
+<!--        android:layout_height="65dp"-->
+<!--        android:background="@drawable/btn_filter_tag"-->
+<!--        app:backgroundTint="@null"-->
+<!--        android:textOn=""-->
+<!--        android:textOff=""-->
+
+<!--        android:layout_marginTop="50dp"-->
+
+<!--        app:layout_constraintStart_toStartOf="@+id/tv_filter_title"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tv_filter_title" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/music"-->
+<!--        android:layout_width="65dp"-->
+<!--        android:layout_height="65dp"-->
+<!--        android:background="@drawable/btn_filter_tag"-->
+<!--        app:backgroundTint="@null"-->
+
+<!--        android:layout_marginLeft="40dp"-->
+
+<!--        app:layout_constraintBottom_toBottomOf="@+id/sport"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/sport"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/sport" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/cnx"-->
+<!--        android:layout_width="65dp"-->
+<!--        android:layout_height="65dp"-->
+<!--        android:background="@drawable/btn_filter_tag"-->
+<!--        app:backgroundTint="@null"-->
+
+<!--        android:layout_marginLeft="40dp"-->
+
+<!--        app:layout_constraintBottom_toBottomOf="@+id/music"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/music"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/music" />-->
+
+    <ToggleButton
+        android:id="@+id/sport"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/selector_topic_background"
+        app:backgroundTint="@null"
+        android:textOn=""
+        android:textOff=""
+        android:stateListAnimator="@null"
+
+        android:layout_marginTop="50dp"
+
+        app:layout_constraintStart_toStartOf="@+id/tv_filter_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_filter_title" />
+
+    <ToggleButton
+        android:id="@+id/music"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/selector_topic_background"
+        app:backgroundTint="@null"
+        android:textOn=""
+        android:textOff=""
+        android:stateListAnimator="@null"
+
+        android:layout_marginLeft="40dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/sport"
+        app:layout_constraintStart_toEndOf="@+id/sport"
+        app:layout_constraintTop_toTopOf="@+id/sport" />
+
+    <ToggleButton
+        android:id="@+id/cnx"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/selector_topic_background"
+        app:backgroundTint="@null"
+        android:textOn=""
+        android:textOff=""
+        android:stateListAnimator="@null"
+
+        android:layout_marginLeft="40dp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/music"
+        app:layout_constraintStart_toEndOf="@+id/music"
+        app:layout_constraintTop_toTopOf="@+id/music" />
+
+    <ImageView
+        android:id="@+id/ic_sport"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/sport"
+        app:layout_constraintEnd_toEndOf="@+id/sport"
+        app:layout_constraintStart_toStartOf="@+id/sport"
+        app:layout_constraintTop_toTopOf="@+id/sport"
+        app:srcCompat="@drawable/ic_sport" />
+
+    <ImageView
+        android:id="@+id/ic_music"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/music"
+        app:layout_constraintEnd_toEndOf="@+id/music"
+        app:layout_constraintStart_toStartOf="@+id/music"
+        app:layout_constraintTop_toTopOf="@+id/music"
+        app:srcCompat="@drawable/ic_music" />
+
+    <ImageView
+        android:id="@+id/ic_cnx"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cnx"
+        app:layout_constraintEnd_toEndOf="@+id/cnx"
+        app:layout_constraintStart_toStartOf="@+id/cnx"
+        app:layout_constraintTop_toTopOf="@+id/cnx"
+        app:srcCompat="@drawable/ic_cnx" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thể thao"
+        android:textSize="14dp"
+
+        android:layout_marginTop="5dp"
+
+        app:layout_constraintEnd_toEndOf="@+id/sport"
+        app:layout_constraintStart_toStartOf="@+id/sport"
+        app:layout_constraintTop_toBottomOf="@+id/sport" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Âm nhạc"
+        android:textSize="14dp"
+
+        android:layout_marginTop="5dp"
+
+        app:layout_constraintEnd_toEndOf="@+id/music"
+        app:layout_constraintStart_toStartOf="@+id/music"
+        app:layout_constraintTop_toBottomOf="@+id/music" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chủ nhật xanh"
+        android:textSize="14dp"
+
+        android:layout_marginTop="5dp"
+
+        app:layout_constraintEnd_toEndOf="@+id/cnx"
+        app:layout_constraintStart_toStartOf="@+id/cnx"
+        app:layout_constraintTop_toBottomOf="@+id/cnx" />
+
+    <TextView
+        android:id="@+id/tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chủ đề"
+        android:textSize="18dp"
+        android:textStyle="bold"
+
+        android:layout_marginTop="20dp"
+
+        app:layout_constraintStart_toStartOf="@+id/tv_filter_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_filter_title" />
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Thời gian"
+        android:textSize="18dp"
+        android:textStyle="bold"
+
+        android:layout_marginTop="130dp"
+
+        app:layout_constraintStart_toStartOf="@+id/tv_filter_title"
+        app:layout_constraintTop_toBottomOf="@+id/tag" />
+
+<!--    <Button-->
+<!--        android:id="@+id/today"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/btn_filter_time"-->
+<!--        android:text="Hôm nay"-->
+<!--        android:textColor="#807A7A"-->
+<!--        android:textSize="15dp"-->
+<!--        app:backgroundTint="@null"-->
+
+<!--        android:layout_marginTop="15dp"-->
+
+<!--        app:layout_constraintStart_toStartOf="@+id/time"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/time" />-->
+
+
+
+<!--    <Button-->
+<!--        android:id="@+id/tmr"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/btn_filter_time"-->
+<!--        app:backgroundTint="@null"-->
+<!--        android:text="Ngày mai"-->
+<!--        android:textColor="#807A7A"-->
+<!--        android:textSize="15dp"-->
+
+<!--        android:layout_marginLeft="20dp"-->
+
+<!--        app:layout_constraintBottom_toBottomOf="@+id/today"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/today"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/today" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/week"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/btn_filter_time"-->
+<!--        android:text="Tuần này"-->
+<!--        android:textColor="#807A7A"-->
+<!--        android:textSize="15dp"-->
+<!--        app:backgroundTint="@null"-->
+
+<!--        android:layout_marginLeft="20dp"-->
+
+<!--        app:layout_constraintBottom_toBottomOf="@+id/tmr"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/tmr"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/tmr" />-->
+    <RadioGroup
+        android:id="@+id/radio_group_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="@+id/time"
+        app:layout_constraintTop_toBottomOf="@+id/time">
+
+        <RadioButton
+            android:id="@+id/today"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_time_background"
+            android:textColor="@drawable/selector_time_text"
+            android:button="@null"
+            android:gravity="center"
+            android:text="Hôm nay"
+            android:textSize="15dp"
+            app:backgroundTint="@null" />
+
+        <RadioButton
+            android:id="@+id/tmr"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/selector_time_background"
+            android:textColor="@drawable/selector_time_text"
+            android:button="@null"
+            android:gravity="center"
+            android:text="Ngày mai"
+            android:textSize="15dp"
+            app:backgroundTint="@null" />
+
+        <RadioButton
+            android:id="@+id/week"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/selector_time_background"
+            android:textColor="@drawable/selector_time_text"
+            android:button="@null"
+            android:gravity="center"
+            android:text="Tuần này"
+            android:textSize="15dp"
+            app:backgroundTint="@null" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="160dp"
+        android:layout_height="50dp"
+        android:text="ĐẶT LẠI"
+        android:background="@drawable/btn_filter_time"
+        app:backgroundTint="@null"
+        android:textColor="@color/black"
+
+        android:layout_marginTop="150dp"
+
+        app:layout_constraintStart_toStartOf="@+id/tv_filter_title"
+        app:layout_constraintTop_toBottomOf="@+id/radio_group_time"
+        />
+
+    <Button
+        android:id="@+id/oke"
+        android:layout_width="190dp"
+        android:layout_height="50dp"
+        android:background="@drawable/btn_filter_oke"
+        android:text="XÁC NHẬN"
+
+
+        android:layout_marginLeft="17dp"
+
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/reset"
+        app:layout_constraintStart_toEndOf="@+id/reset"
+        app:layout_constraintTop_toTopOf="@+id/reset" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

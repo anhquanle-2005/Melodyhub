@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".View.Fragment.HeaderFragment">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="horizontal">
+      <ImageView
+          android:layout_marginLeft="5dp"
+          android:layout_width="60dp"
+          android:layout_height="60dp"
+          android:layout_gravity="center_vertical"
+          android:src="@drawable/logo"/>
+      <LinearLayout
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="5sp"
+          android:layout_gravity="center_vertical"
+          android:orientation="vertical">
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="ĐẠI HỌC ĐÀ NẴNG"
+              android:textSize="20dp"
+              android:textStyle="bold"
+              android:textColor="#10A7FF"/>
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="TRƯỜNG ĐẠI HỌC SƯ PHẠM KỸ THUẬT"
+              android:textColor="#10A7FF"
+              android:textSize="14dp"
+              android:textStyle="bold" />
+
+          <View
+              android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="@color/black"/>
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textStyle="bold"
+              android:textSize="20dp"
+              android:textColor="#FE0000"
+              android:text="ỨNG DỤNG QUẢN L SỰ KIỆN"/>
+      </LinearLayout>
+      <ImageView
+          android:layout_gravity="center_vertical"
+          android:layout_marginLeft="5dp"
+          android:layout_width="30dp"
+          android:layout_height="50dp"
+          android:src="@drawable/search"/>
+  </LinearLayout>
+
+
+</LinearLayout>
